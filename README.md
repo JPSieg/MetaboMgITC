@@ -8,10 +8,10 @@
 
 #### RNA regulates myriad cellular events such as transcription, translation, and splicing. To perform these essential functions, RNA folds into complex tertiary structures where a negatively charged ribose-phosphate backbone interacts with metal ions. Magnesium, the most abundant divalent metal ion in cells, neutralizes the backbone thereby playing essential roles in RNA folding and function. In the cell, some Mg2+ ions are chelated by metabolites. Recently, we have demonstrated that this metabolite chelated magnesium (MCM) pool can effect RNA folding and function, depending on the strength of the interaction between Mg2+ and metabolites. The binding of Mg2+ to metabolites is highly dependent on pH and ionic strength, which changes the population of Mg2+ binding competent protonation states for a metabolite ligand and changes the activity of ions in aqueose solution respectivly, further complicating the actual Mg2+ status in cells. In an effort towards gaining insight into the role of biologically chelated magnesium ions in RNA chemistry and biology, we have:
 
-#### (1) Currated a database of 292 absolute metabolite concentration from E. coli, Yeast, and mouse iMBK cells.
+#### (1) Currated a database of 292 absolute metabolite concentrations from E. coli, Yeast, and mouse iMBK cells.
 #### (2) Currated a database of pKa's, Mg2+ binding constants, ionic strengths, and temperatures for 120 metabolite ligands. This data, 582 constants in total, is used to calculate apparant metabolite/Mg2+ dissacociation constants at specific pH's and ionic strengths.
-#### (3) R functions to provide a user with a relatively facile way to acess and interperate the data. Most importantly, we provide "Kd.app.calc", which enables the user to calculate apparent metabolite/Mg2+ dissacociation constants at specific pH's and ionic strengths.
-#### (4) Isothermal titration calorimetry (ITC) data analysis tools to experimentally determine apparent metabolite/Mg2+ dissacociation constants at specific pH's and ionic strengths.
+#### (3) R functions to provide a user with a relatively facile way to acess and interperate the data. Most importantly, we provide "Kd.app.calc", which enables the user to calculate apparent metabolite/Mg2+ dissacociation constants at aany pH and ionic strength.
+#### (4) Isothermal titration calorimetry (ITC) data analysis tools to experimentally determine apparent metabolite/Mg2+ dissacociation constants at a pH and ionic strength.
 
 #### An example implementation of MetaboMgITC is dementrated below, where MCM levels are projected for E. coli, Yeast, and mouse iMBK cells at pH 7.5 and ionic strength = 0.15 M.
 
@@ -25,6 +25,7 @@
 #### devtools (R package)
 #### pracma (R package)
 #### dplyr (R package)
+#### ggplot2 (R package)
 
 ## Recomended packages and programs
 
@@ -57,7 +58,7 @@ K<sub>D</sub>' = [M][L]/[ML]  Equation 1
 
 K'<sub>D</sub> = 1/(a<sub>i</sub>10<sup>log<sub>10</sub>K'</sup>)  Equation 2
 
-#### Let’s first consider a<sub>i</sub>. The values of  for the fully deprotonated (L) and singly protonated (HL) species (i.e. the two species most likely to bind metal ion) were determined from protonation constants (pKa’s) from the literature using equations 3 and 4. For most metabolites, the metal ion binding-competent state is completely deprotonated. The major exceptions are L-Glutamic acid, L-Aspartic acid, and L-Arginine, which have affinity for divalent magnesium cations in the singly protonated state. The mole fraction of ligand in protonation states L and HL was calculated using equations 3 and 4 respectively.<sup>2</sup>
+#### Let’s first consider a<sub>i</sub>. The fraction of fully deprotonated (L) and singly protonated (HL) ligand species (i.e. the two species most likely to bind metal ion) were determined from protonation constants (pKa’s) from the literature using equations 3 and 4. For most metabolites, the metal ion binding-competent state is completely deprotonated. The major exceptions are L-Glutamic acid, L-Aspartic acid, and L-Arginine, which have affinity for divalent magnesium cations in the singly protonated state. The mole fraction of ligand in protonation states L and HL was calculated using equations 3 and 4 respectively.<sup>2</sup>
 
 a<sub>L</sub> = 1/(1 + 10<sup>pKa<sub>HL</sub>-pH</sup> + 10<sup>pKa<sub>HL</sub> + pKa<sub>H<sub>2</sub>L</sub> - 2pH</sup>) Equation 3
 
@@ -79,11 +80,11 @@ z = z<sub>L</sub><sup>2</sup> + z<sub>M</sub><sup>2</sup> - z<sub>ML</sub><sup>2
 
 ## 3.2 Calculating MCM levels in cells
 
-#### MCM concentrations can be calculated using the free Mg concentration in cells, about 0.5 to 3 mM, and the K<sub>D</sub>' by rearranging equation 1.
+#### MCM concentrations can be calculated using the free Mg2+ concentration in cells, about 0.5 to 3 mM, and the K<sub>D</sub>' by rearranging equation 1. In the example analysis shown here, we use 2 mM free Mg2+ for E. coli cells and 0.5 mM free Mg2+ for Yeast and iMBK cells.
 
 [ML] = [L]<sub>Total</sub>*[M]/(K<sub>D</sub> + [M]) Equation 7
 
-#### This assumes one-to-one binding between all metabolites and Mg ions, which is reasonable given that there is little evidence of multivalent metabolite interections with Mg in the liturature, where multivalent interactions are insoluble and occur at molar concentrations, well above the mM concentrations found in vivo. Source code is housed in "R/MetaboMgITC.R".
+#### This assumes one-to-one binding between all metabolites and Mg ions, which is reasonable given that there is little evidence of multivalent metabolite interections with Mg in the liturature, where multivalent interactions are insoluble and occur at molar concentrations, well above the mM concentrations found in vivo.
 
 ## 3.3 ITC data collection and analysis
 
