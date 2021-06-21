@@ -61,7 +61,7 @@ K'<sub>D</sub> = 1/(a<sub>i</sub>10<sup>log<sub>10</sub>K'</sup>)  Equation 2
 
 a<sub>L</sub> = 1/(1 + 10<sup>pKa<sub>HL</sub>-pH</sup> + 10<sup>pKa<sub>HL</sub> + pKa<sub>H<sub>2</sub>L</sub> - 2pH</sup>) Equation 3
 
-a<sub>HL</sub> =  10<sup>pKa<sub>HL</sub></sup>/(1 + 10<sup>pKa<sub>HL</sub>-pH</sup> + 10<sup>pKa<sub>HL</sub> + pKa<sub>H<sub>2</sub>L</sub> - 2pH</sup>) Equation 4
+a<sub>HL</sub> =  10<sup>pKa<sub>HL</sub>-pH</sup>/(1 + 10<sup>pKa<sub>HL</sub>-pH</sup> + 10<sup>pKa<sub>HL</sub> + pKa<sub>H<sub>2</sub>L</sub> - 2pH</sup>) Equation 4
 
 #### Now let’s consider K'.  This is the ionic strength-corrected binding constant for a ligand in a single protonation state<sup>2</sup>.  It was corrected using the simplified Debye-Hückel equation<sup>3</sup>:
 
